@@ -2,7 +2,13 @@ package presenter;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+
+import controllers.contentDistribution;
 
 /**
  * Presenter to manage multiple display application
@@ -54,6 +60,23 @@ public class displayPresenter {
                 this.secondaryScreen = allScreens.get(0);
             }
         }
+    }
+
+    /**
+     * Insert menu items into stage
+     * @return void
+     */
+    public void insertMenu( String menuName, Integer group ) throws SQLException {
+
+        contentDistribution elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
+            elContent.connectDB();
+        if(Objects.equals(menuName, "main")){
+            ArrayList menuItems = elContent.getMainMenu();
+            for (int i = 0; i < menuItems.size(); i++) {
+                System.out.println(menuItems.get(i));
+            }
+        }
+
     }
 
     public Screen getPrimaryScreen(){

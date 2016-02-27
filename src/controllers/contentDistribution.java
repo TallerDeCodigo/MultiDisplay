@@ -16,14 +16,12 @@ public class contentDistribution {
     String password = "root";
     Connection connection = null;
 
-
     public contentDistribution(String connection_url, String username, String password){
         this.connection_url =  (connection_url != null) ? connection_url : this.connection_url;
         this.username = (username != null) ? username : this.username;
         this.password = (password != null) ? password : this.password;
 
     }
-
 
     /**
      * Connect to MySQL databse
@@ -48,21 +46,42 @@ public class contentDistribution {
     }
 
     /**
-     * Connect to MySQL databse
+     * Get menu items by group id
      * @param String query
      */
-    public ArrayList getSubmenu(Integer parent){
+    public ArrayList getMainMenu() throws SQLException {
         ArrayList resultSet = new ArrayList();
-        try(PreparedStatement Statement = this.connection.prepareStatement("Select * from places")){
+        try(PreparedStatement Statement = this.connection.prepareStatement("SELECT * FROM groups;")){
             ResultSet result = Statement.executeQuery();
+            System.out.println(result);
+            /*if(result)
             while(result.next()) {
                 resultSet.add(result.getString("name"));
-            }
+            }*/
         }catch(SQLException e){
             throw new SQLException("Error executing query", e);
         }
 
-        return
+        return resultSet;
+    }
+
+    /**
+     * Get submenu items by parent id
+     * @param String query
+     */
+    public ArrayList getSubmenu(Integer parent) throws SQLException {
+        ArrayList resultSet = new ArrayList();
+        try(PreparedStatement Statement = this.connection.prepareStatement(String.format("SELECT * FROM places WHERE group = %d", parent))){
+            ResultSet result = Statement.executeQuery();
+           /* if(result)
+            while(result.next()) {
+                resultSet.add(result.getString("name"));
+            }*/
+        }catch(SQLException e){
+            throw new SQLException("Error executing query", e);
+        }
+
+        return resultSet;
     }
 
 }

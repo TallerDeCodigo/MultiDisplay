@@ -14,17 +14,20 @@ import controllers.mediaController;
 import controllers.contentDistribution;
 import presenter.displayPresenter;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /**
  * Main Class to launch application
  * @author John Falcon
  */
-public class Launcher extends Application{
+public class Launcher extends Application implements ActionListener{
 
     public void start(Stage primaryStage) throws Exception {
 
-        final StackPane root = new StackPane();
-        final StackPane rootSecondary = new StackPane();
+        final StackPane stackPrimary = new StackPane();
+        final StackPane stackSecondary = new StackPane();
         int width = 800;
         int height = 600;
 
@@ -35,17 +38,20 @@ public class Launcher extends Application{
         /* Initialize media manager */
         mediaController mediaCtrlr = new mediaController();
 
-        /* Initialize presenter and displays */
+        /* Initialize presenter and detect displays */
         displayPresenter presenter = new displayPresenter();
 
             presenter.detectDisplays();
             Screen myPrimaryScreen = presenter.getPrimaryScreen();
             Screen mySecondaryScreen = presenter.getSecondaryScreen();
 
-            /* Set Controller window dimensions */
+            /* Set Viewport window dimensions */
             Rectangle2D primaryScreenBounds = myPrimaryScreen.getVisualBounds();
 
-                primaryStage.initStyle(StageStyle.TRANSPARENT);
+                Scene sceneViewport = new Scene(stackPrimary, width, height);
+                primaryStage.setScene(sceneViewport);
+
+                // primaryStage.initStyle(StageStyle.TRANSPARENT);
                 primaryStage.setTitle("Mirador interactivo Puebla - Viewport");
                 primaryStage.setX(primaryScreenBounds.getMinX());
                 primaryStage.setY(primaryScreenBounds.getMinY());
@@ -53,12 +59,13 @@ public class Launcher extends Application{
                 primaryStage.setHeight(primaryScreenBounds.getHeight());
 
             /* Set Controller window dimensions */
-            Rectangle2D secondaryScreenBounds = myPrimaryScreen.getVisualBounds();
-                Scene sceneSurface = new Scene(root, width, height);
-                Stage secondStageTurbineBlade = new Stage();
-                Scene sceneViewport = new Scene(rootSecondary, width, height);
-                secondStageTurbineBlade.setScene(sceneViewport);
-                secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
+            Rectangle2D secondaryScreenBounds = mySecondaryScreen.getVisualBounds();
+            Stage secondStageTurbineBlade = new Stage();
+
+                Scene sceneSurface = new Scene(stackSecondary, width, height);
+                secondStageTurbineBlade.setScene(sceneSurface);
+
+                // secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
                 secondStageTurbineBlade.setTitle("Mirador interactivo Puebla - Controller Surface");
                 secondStageTurbineBlade.setX(secondaryScreenBounds.getMinX());
                 secondStageTurbineBlade.setY(secondaryScreenBounds.getMinY());
@@ -66,32 +73,49 @@ public class Launcher extends Application{
                 secondStageTurbineBlade.setHeight(secondaryScreenBounds.getHeight());
 
         /* Add elements to Controller surface */
+        final MediaView theCompassView = mediaCtrlr.loadVideo( "file:///Users/johm_tdc/Puebla/loop-brujula.mp4", stackSecondary, true, true );
+        stackSecondary.getChildren().add(theCompassView);
 
+        stackSecondary.widthProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                theCompassView.setFitWidth(stackSecondary.getWidth());
+            }
+        });
 
+        stackSecondary.heightProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                theCompassView.setFitHeight(stackSecondary.getHeight());
+            }
+        });
 
         /* Add elements to Viewport screen */
-        final MediaView theView = mediaCtrlr.loadVideo( "file:///Users/johm_tdc/Puebla/Intro.mp4", root, true, true );
-        root.getChildren().add(theView);
+        final MediaView theViewportView = mediaCtrlr.loadVideo( "file:///Users/johm_tdc/Puebla/loop-transparente.mp4", stackPrimary, true, true );
+        stackPrimary.getChildren().add(theViewportView);
 
-            root.widthProperty().addListener(new InvalidationListener() {
+        stackPrimary.widthProperty().addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable observable) {
-                    theView.setFitWidth(root.getWidth());
+                    theViewportView.setFitWidth(stackPrimary.getWidth());
                 }
             });
 
-            root.heightProperty().addListener(new InvalidationListener() {
+        stackPrimary.heightProperty().addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable observable) {
-                    theView.setFitHeight(root.getHeight());
+                    theViewportView.setFitHeight(stackPrimary.getHeight());
                 }
             });
-
-
-        secondStageTurbineBlade.show();
-
-        primaryStage.setScene(sceneSurface);
+        presenter.insertMenu("main", null);
         primaryStage.show();
+        secondStageTurbineBlade.show();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        System.out.println(e.toString());
     }
 
     public static void main(String[] args){
