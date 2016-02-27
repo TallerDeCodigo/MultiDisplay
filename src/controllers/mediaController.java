@@ -15,7 +15,7 @@ import controllers.mediaController;
 
 /**
  * Media Controller class
- * @author John Falcon
+ * @author John Falcon for TDC
  * @version 0.1.1
  */
 public class mediaController {
@@ -31,15 +31,18 @@ public class mediaController {
      * @param String file_url
      * @param Boolean autoplay
      */
-    public MediaView loadVideo( String file_url, Object container, Boolean autoplay){
+    public MediaView loadVideo( String file_url, Object container, Boolean autoplay, Boolean loop){
 
         Media newMedia      = new Media(file_url);
         MediaPlayer thePlayer = new MediaPlayer(newMedia);
         final MediaView theView = new MediaView(thePlayer);
 
         thePlayer.setAutoPlay(autoplay);
+        if(loop)
+            thePlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         return theView;
     }
+
 
 }

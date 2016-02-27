@@ -1,6 +1,8 @@
 package presenter;
-
 import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+import java.util.List;
 
 /**
  * Presenter to manage multiple display application
@@ -17,7 +19,6 @@ public class displayPresenter {
 
     public displayPresenter(){
 
-        this.detectDisplays();
     }
 
     /**
@@ -39,18 +40,28 @@ public class displayPresenter {
     public void detectDisplays(){
         final Screen primaryScreen = Screen.getPrimary();
         final List<Screen> allScreens = Screen.getScreens();
-        Screen secondaryScreen;
+        // Screen secondaryScreen;
+        this.primaryScreen = primaryScreen;
         if (allScreens.size() <= 1) {
-            System.out.println("Only one screen detected");
-            this.secondaryScreen = primaryScreen;
+            System.out.println("Only one screen detected, using the same output");
+            this.primaryScreen      = primaryScreen;
+            this.secondaryScreen    = primaryScreen;
         } else {
-
+            System.out.println("Both screens working");
             if (allScreens.get(0).equals(primaryScreen)) {
                 this.secondaryScreen = allScreens.get(1);
             } else {
                 this.secondaryScreen = allScreens.get(0);
             }
         }
+    }
+
+    public Screen getPrimaryScreen(){
+        return this.primaryScreen;
+    }
+
+    public Screen getSecondaryScreen(){
+        return this.secondaryScreen;
     }
 
 }
