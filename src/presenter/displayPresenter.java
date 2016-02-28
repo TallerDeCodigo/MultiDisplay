@@ -69,9 +69,10 @@ public class displayPresenter {
     public void insertMenu( String menuName, Integer group ) throws SQLException {
 
         contentDistribution elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
-            elContent.connectDB();
+
         if(Objects.equals(menuName, "main")){
-            ArrayList menuItems = elContent.getMainMenu();
+            ArrayList menuItems = elContent.fetchMainMenu();
+            System.out.println(menuItems.toString());
             for (int i = 0; i < menuItems.size(); i++) {
                 System.out.println(menuItems.get(i));
             }

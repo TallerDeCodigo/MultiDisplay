@@ -5,7 +5,7 @@ package model;
  * @author John Falcon for TDC
  * @version 0.1.1
  */
-public class place {
+public class Place {
 
     Integer id;
     String name;
@@ -14,8 +14,10 @@ public class place {
     String video;
     String description;
     Integer group;
+    Integer order;
+    Boolean cluster;
 
-    public place( Integer id, String name, String latlong, String image, String video, String description, Integer group ){
+    public Place(Integer id, String name, String latlong, String image, String video, String description, Integer group ){
         this.setId(id);
         this.setName(name);
         this.setLatlong(latlong);
@@ -23,6 +25,17 @@ public class place {
         this.setVideo(video);
         this.setDescription(description);
         this.setGroup(group);
+        setCluster(false);
+    }
+
+    public Place(){
+        this.setId(null);
+        this.setName(null);
+        this.setLatlong(null);
+        this.setImage(null);
+        this.setVideo(null);
+        this.setDescription(null);
+        this.setGroup(null);
     }
 
     public Integer getId() {
@@ -79,5 +92,21 @@ public class place {
 
     public void setGroup(Integer group) {
         this.group = group;
+    }
+
+    public Boolean getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(Boolean cluster) {
+        this.cluster = cluster;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }
