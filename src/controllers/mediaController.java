@@ -1,16 +1,9 @@
 package controllers;
-import javafx.application.Application;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
-import javafx.stage.Screen;
-import javafx.geometry.Rectangle2D;
-import controllers.mediaController;
 
 
 /**
@@ -27,21 +20,34 @@ public class mediaController {
     }
 
     /**
-     *
+     * Load image file into ImageView Control
+     * @param String file_url
+     * @return ImageView
+     */
+    public ImageView loadImage( String file_url){
+        final ImageView theImgView = new ImageView();
+        Image myImage = new Image(file_url);
+        theImgView.setImage(myImage);
+        theImgView.setPreserveRatio(true);
+        theImgView.setSmooth(true);
+        theImgView.setCache(true);
+        return theImgView;
+    }
+
+    /**
+     * Load video file into MediaView Control
      * @param String file_url
      * @param Boolean autoplay
      */
     public MediaView loadVideo( String file_url, Object container, Boolean autoplay, Boolean loop){
-
-        Media newMedia      = new Media(file_url);
+        Media newMedia        = new Media(file_url);
         MediaPlayer thePlayer = new MediaPlayer(newMedia);
-        final MediaView theView = new MediaView(thePlayer);
-
+        final MediaView theVideoView = new MediaView(thePlayer);
+        theVideoView.setPreserveRatio(true);
         thePlayer.setAutoPlay(autoplay);
         if(loop)
             thePlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
-        return theView;
+        return theVideoView;
     }
 
 

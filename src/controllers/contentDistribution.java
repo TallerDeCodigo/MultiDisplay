@@ -1,7 +1,6 @@
 package controllers;
 
 import model.Place;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -11,7 +10,6 @@ import java.util.ArrayList;
  * @author John Falcon for TDC
  * @version 0.1.1
  */
-
 public class contentDistribution {
 
     private String connection_url = "jdbc:mysql://127.0.0.1:3306/puebla_interactive";
@@ -29,17 +27,17 @@ public class contentDistribution {
     }
 
     /**
-     * Connect to MySQL databse
+     * Connect to MySQL database
      * @param String database_name
      */
     public Connection connectDB(){
 
-        /*try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Driver loaded!");
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Cannot find the driver in the classpath!", e);
-        }*/
+        }
         if(this.connection == null)
             try{
                 Connection aconnection = DriverManager.getConnection(connection_url, username, password);
@@ -83,18 +81,17 @@ public class contentDistribution {
             e.printStackTrace();
             throw new SQLException("Error executing query", e);
         }
-
     }
 
     /**
      * Get submenu items by parent id
      * @param String query
      */
-    public ArrayList getSubmenu(Integer parent) throws SQLException {
+    public ArrayList fetchSubmenu(Integer parent) throws SQLException {
         ArrayList<Place> resultSet = new ArrayList();
         Connection localcon = getConnection();
         try{
-            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE group = %d", parent) );
+            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE grupo = %d ;", parent) );
             ResultSet result = statement.executeQuery();
             if(result != null)
                 while(result.next()) {
@@ -115,6 +112,34 @@ public class contentDistribution {
         }catch(SQLException e){
             throw new SQLException("Error executing query", e);
         }
+    }
+
+    /**
+     * Fetch detail content
+     * @param String query
+     */
+    public Place fetchDetail(Integer place_id) throws SQLException {
+        Connection localcon = getConnection();
+        try{
+            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE id = %d ;", place_id) );
+            ResultSet result = statement.executeQuery();
+            if(result != null)
+                while(result.next()) {
+                    Place myPlace = new Place();
+                    myPlace.setId(result.getInt("id"));
+                    myPlace.setGroup(result.getInt("order"));
+                    myPlace.setName(result.getString("name"));
+                    myPlace.setDescription(result.getString("description"));
+                    myPlace.setImage(result.getString("image"));
+                    myPlace.setVideo(result.getString("video"));
+                    myPlace.setLatlong(result.getString("latlong"));
+                    return myPlace;
+                }
+            statement.close();
+        }catch(SQLException e){
+            throw new SQLException("Error executing query", e);
+        }
+        return new Place();
     }
 
     public Connection getConnection() {

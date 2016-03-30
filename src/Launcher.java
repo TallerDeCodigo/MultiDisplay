@@ -1,25 +1,28 @@
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.geometry.Rectangle2D;
 import controllers.mediaController;
 import controllers.contentDistribution;
+import javafx.stage.StageStyle;
 import model.Place;
 import presenter.displayPresenter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javafx.event.ActionEvent;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -27,18 +30,19 @@ import java.util.ArrayList;
  * Main Class to launch application
  * @author John Falcon
  */
-public class Launcher extends Application implements ActionListener{
+public class Launcher extends Application{
 
     final StackPane stackPrimary = new StackPane();
     final StackPane stackSecondary = new StackPane();
     private contentDistribution elContent = null;
-    int width = 800;
+    int width  = 800;
     int height = 600;
+    //final String resources = "file:///C://Puebla/";
     final String resources = "file:///Users/johm_tdc/Puebla/";
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
 
-        /* Initialize content delivery */
+        /* Initialize content delivery class */
         elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
 
         /* Initialize media manager */
@@ -47,33 +51,32 @@ public class Launcher extends Application implements ActionListener{
         /* Initialize presenter and detect displays */
         displayPresenter presenter = new displayPresenter();
 
-            presenter.detectDisplays();
-            Screen myPrimaryScreen = presenter.getPrimaryScreen();
-            Screen mySecondaryScreen = presenter.getSecondaryScreen();
+        presenter.detectDisplays();
+        Screen myPrimaryScreen = presenter.getPrimaryScreen();
+        Screen mySecondaryScreen = presenter.getSecondaryScreen();
 
-            /* Set Viewport window dimensions */
-            Rectangle2D primaryScreenBounds = myPrimaryScreen.getVisualBounds();
+        /* Set Viewport window dimensions */
+        Rectangle2D primaryScreenBounds = myPrimaryScreen.getVisualBounds();
 
-                Scene sceneViewport = new Scene(stackPrimary, width, height);
-                primaryStage.setScene(sceneViewport);
+        Scene sceneViewport = new Scene(stackPrimary, width, height);
+        primaryStage.setScene(sceneViewport);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle("Mirador interactivo Puebla - Viewport");
+        primaryStage.setX(primaryScreenBounds.getMinX());
+        primaryStage.setY(primaryScreenBounds.getMinY());
+        primaryStage.setWidth(primaryScreenBounds.getWidth());
+        primaryStage.setHeight(primaryScreenBounds.getHeight());
 
-                // primaryStage.initStyle(StageStyle.TRANSPARENT);
-                primaryStage.setTitle("Mirador interactivo Puebla - Viewport");
-                primaryStage.setX(primaryScreenBounds.getMinX());
-                primaryStage.setY(primaryScreenBounds.getMinY());
-                primaryStage.setWidth(primaryScreenBounds.getWidth());
-                primaryStage.setHeight(primaryScreenBounds.getHeight());
+        /* Set Controller window dimensions */
+        Rectangle2D secondaryScreenBounds = mySecondaryScreen.getVisualBounds();
+        final Stage secondStageTurbineBlade = new Stage();
 
-            /* Set Controller window dimensions */
-            Rectangle2D secondaryScreenBounds = mySecondaryScreen.getVisualBounds();
-            final Stage secondStageTurbineBlade = new Stage();
-
-                // secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
-                secondStageTurbineBlade.setTitle("Mirador interactivo Puebla - Controller Surface");
-                secondStageTurbineBlade.setX(secondaryScreenBounds.getMinX());
-                secondStageTurbineBlade.setY(secondaryScreenBounds.getMinY());
-                secondStageTurbineBlade.setWidth(secondaryScreenBounds.getWidth());
-                secondStageTurbineBlade.setHeight(secondaryScreenBounds.getHeight());
+        secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
+        secondStageTurbineBlade.setTitle("Mirador interactivo Puebla - Controller Surface");
+        secondStageTurbineBlade.setX(secondaryScreenBounds.getMinX());
+        secondStageTurbineBlade.setY(secondaryScreenBounds.getMinY());
+        secondStageTurbineBlade.setWidth(secondaryScreenBounds.getWidth());
+        secondStageTurbineBlade.setHeight(secondaryScreenBounds.getHeight());
 
         /* Add elements to Viewport screen */
         final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", stackPrimary, true, true );
@@ -96,13 +99,6 @@ public class Launcher extends Application implements ActionListener{
         /* Add elements to Controller surface */
         final MediaView theCompassView = mediaCtrlr.loadVideo( resources+"loop-brujula.mp4", stackSecondary, true, true );
 
-        stackSecondary.getChildren().add(theCompassView);
-        Button myButton = new Button();
-        myButton.setStyle("-fx-background-color:cyan");
-        stackSecondary.getChildren().add(myButton);
-        Scene sceneSurface = new Scene(stackSecondary, width, height);
-        secondStageTurbineBlade.setScene(sceneSurface);
-
         stackSecondary.widthProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
@@ -117,39 +113,117 @@ public class Launcher extends Application implements ActionListener{
             }
         });
 
-        /* try {
-            BorderPane boxes = addBoxes();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
+        final Button initButton = new Button("TOCA LA PANTALLA PARA INICIAR");
+        initButton.setMinWidth(1280);
+        initButton.setMinHeight(720);
+        initButton.setStyle("-fx-background-color: transparent; -fx-font-size: 30px; -fx-text-fill: #0b1247; -fx-text-align: center; -fx-font-weight: 900; -fx-padding: 500 0 0 0");
+        initButton.setOnAction( new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event){
+                BorderPane boxes = null;
+                try {
+                    boxes = addBoxes(primaryStage);
+                    stackSecondary.getChildren().remove(initButton);
+                    stackSecondary.getChildren().add(boxes);
+                    Scene sceneSurface = new Scene(stackSecondary, width, height);
+                    secondStageTurbineBlade.setScene(sceneSurface);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        stackSecondary.getChildren().addAll(theCompassView, initButton);
+        Scene sceneSurface = new Scene(stackSecondary, width, height);
+        secondStageTurbineBlade.setScene(sceneSurface);
 
         primaryStage.show();
         secondStageTurbineBlade.show();
     }
 
-
-    public BorderPane addBoxes() throws Exception{
-        BorderPane border = new BorderPane();
+    public BorderPane addBoxes(final Stage primaryStage) throws Exception{
+        final BorderPane border = new BorderPane();
         VBox vbox = new VBox();
-            vbox.setPadding(new Insets(10));
+        vbox.setPadding(new Insets(20));
 
         ArrayList<Place> elements;
         elements = elContent.fetchMainMenu();
-        //Image imageDecline = new Image(getClass().getResourceAsStream(resources+"buttons/bg_submenu.png"));
-        //System.out.println(imageDecline);
-        /*Button button5 = new Button();
-        button5.setGraphic(new ImageView(imageDecline));*/
-        /*for (Place element : elements) {
+        Integer inset = 200;
+        for (final Place element : elements) {
+            Button myButton = new Button();
+            myButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
+                    " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
+            myButton.setPrefSize(360, 110);
 
-            Button myButton = new Button(element.getName());
-            vbox.getChildren().addAl(myButton);
-            //myButton.setStyle("-fx-background-image: url('"+resources+"buttons/bg_submenu.png')");
-            //VBox.setMargin(myButton, new Insets(10, 10, 10, 10));
-        }*/
-        Button myButton = new Button("My Button");
-        vbox.getChildren().add(myButton);
+            /* Set action on main menu buttons */
+            myButton.setOnAction( new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event){
+                    ArrayList<Place> myResults = new ArrayList();
+                    final displayPresenter presenter = new displayPresenter();
+                    Integer subinset = 220;
+                    Integer subpadding= 30;
+                    try {
+                        VBox vbox = new VBox();
+                        vbox.setPadding(new Insets(20));
+                        Scene newScene = presenter.showStby();
+                        primaryStage.setScene(newScene);
+                        myResults = presenter.insertMenu("submenu", element.getId());
+                        Integer index = 0;
+                        for (final Place place : myResults) {
+                            Button mySubButton = new Button();
+                            mySubButton.setWrapText(true);
+                            mySubButton.setText(place.getName());
+                            mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
+                                    " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                    " -fx-font-size: 16px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 0 30 25 30;");
+                            mySubButton.setPrefSize(360, 80);
+                            //mySubButton.setPadding(new Insets(2,0,2,0));
 
+                            /* Set action on submenu buttons */
+                            mySubButton.setOnAction( new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    try {
+                                        Scene newScene = presenter.showDetail(place.getId());
+                                        primaryStage.setScene(newScene);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                            vbox.setAlignment(Pos.CENTER);
+                            vbox.setMargin(mySubButton, new Insets(0, 0, 2, subinset));
+                            vbox.getChildren().add(mySubButton);
+                            index++;
+                            if(index < (myResults.size()/2))
+                                subinset = subinset+25;
+                            if(index >= (myResults.size()/2))
+                                subinset = subinset-25;
+                            if(index > myResults.size())
+                                subpadding = subpadding-10;
+                        }
+                        border.setRight(vbox);
+                        border.setMargin(vbox, new Insets(0, 200, 0, 0));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            vbox.getChildren().add(myButton);
+            VBox.setMargin(myButton, new Insets(5, 0, 0, inset));
+            if(element.getId() <= 4)
+                inset = inset-50;
+            if(element.getId() >= 4)
+                inset = inset+50;
+        }
+        vbox.setAlignment(Pos.CENTER);
         border.setLeft(vbox);
+        border.setMargin(vbox, new Insets(0,0,0,120));
         return border;
     }
 
@@ -159,15 +233,6 @@ public class Launcher extends Application implements ActionListener{
      */
     private void initEvents(){
 
-       /* Image imageDecline = new Image(getClass().getResourceAsStream("not.png"));
-        Button button5 = new Button();
-        button5.setGraphic(new ImageView(imageDecline));*/
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        System.out.println(e.toString());
     }
 
     public static void main(String[] args){
