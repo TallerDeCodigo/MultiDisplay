@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7a285f68-c3db-4a90-a50d-9e8b301533d6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/mediaController.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/mediaController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Launcher.java" afterPath="$PROJECT_DIR$/src/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/contentDistribution.java" afterPath="$PROJECT_DIR$/src/controllers/contentDistribution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/mediaController.java" afterPath="$PROJECT_DIR$/src/controllers/mediaController.java" />
-    </list>
+    <list default="true" id="7a285f68-c3db-4a90-a50d-9e8b301533d6" name="Default" comment="" />
     <ignored path="MultiDisplay1.1.0.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
