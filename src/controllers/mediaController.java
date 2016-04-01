@@ -45,6 +45,7 @@ public class mediaController {
         final MediaView theVideoView = new MediaView(thePlayer);
         theVideoView.setPreserveRatio(true);
         thePlayer.setAutoPlay(autoplay);
+        thePlayer.setMute(true);
         if(loop)
             thePlayer.setCycleCount(MediaPlayer.INDEFINITE);
         return theVideoView;

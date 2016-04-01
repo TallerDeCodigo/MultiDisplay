@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class contentDistribution {
 
-    private String connection_url = "jdbc:mysql://127.0.0.1:3306/puebla_interactive";
+    private String connection_url = "jdbc:mysql://127.0.0.1:3306/puebla_interactive?autoReconnect=true&useSSL=false";
     private String username       = "root";
     private String password       = "root";
     private Connection connection = null;
@@ -59,7 +59,7 @@ public class contentDistribution {
         ArrayList<Place> resultSet = new ArrayList();
         Connection localcon = getConnection();
         try{
-            PreparedStatement statement = localcon.prepareStatement("SELECT * FROM groups;");
+            PreparedStatement statement = localcon.prepareStatement("SELECT * FROM groups ORDER BY _order;");
             ResultSet result = statement.executeQuery();
 
             if(result != null){
@@ -68,7 +68,7 @@ public class contentDistribution {
                     Place myPlace = new Place();
 
                     myPlace.setId(result.getInt("id"));
-                    myPlace.setGroup(result.getInt("order"));
+                    myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
                     myPlace.setCluster(true);
 
@@ -91,14 +91,14 @@ public class contentDistribution {
         ArrayList<Place> resultSet = new ArrayList();
         Connection localcon = getConnection();
         try{
-            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE grupo = %d ;", parent) );
+            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE grupo = %d ORDER BY _order;", parent) );
             ResultSet result = statement.executeQuery();
             if(result != null)
                 while(result.next()) {
                     Place myPlace = new Place();
 
                     myPlace.setId(result.getInt("id"));
-                    myPlace.setGroup(result.getInt("order"));
+                    myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
                     myPlace.setDescription(result.getString("description"));
                     myPlace.setImage(result.getString("image"));
@@ -121,13 +121,13 @@ public class contentDistribution {
     public Place fetchDetail(Integer place_id) throws SQLException {
         Connection localcon = getConnection();
         try{
-            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE id = %d ;", place_id) );
+            PreparedStatement statement = localcon.prepareStatement(String.format("SELECT * FROM places WHERE id = %d;", place_id) );
             ResultSet result = statement.executeQuery();
             if(result != null)
                 while(result.next()) {
                     Place myPlace = new Place();
                     myPlace.setId(result.getInt("id"));
-                    myPlace.setGroup(result.getInt("order"));
+                    myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
                     myPlace.setDescription(result.getString("description"));
                     myPlace.setImage(result.getString("image"));

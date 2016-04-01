@@ -151,15 +151,17 @@ public class Launcher extends Application{
         elements = elContent.fetchMainMenu();
         Integer inset = 200;
         for (final Place element : elements) {
-            Button myButton = new Button();
-            myButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
-                    " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
+            final Button myButton = new Button();
+            myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
+                                " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
             myButton.setPrefSize(360, 110);
 
             /* Set action on main menu buttons */
             myButton.setOnAction( new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event){
+                    myButton.setStyle(" -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0 0 -1 0, 0, 1, 2; " +
+                                      "-fx-background-radius: 3px, 3px, 2px, 1px;" );
                     ArrayList<Place> myResults = new ArrayList();
                     final displayPresenter presenter = new displayPresenter();
                     Integer subinset = 220;
