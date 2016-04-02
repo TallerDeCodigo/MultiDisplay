@@ -40,6 +40,7 @@ public class Launcher extends Application{
     //final String resources = "file:///C://Puebla/";
     final String resources = "file:///Users/johm_tdc/Puebla/";
 
+
     public void start(final Stage primaryStage) throws Exception {
 
         /* Initialize content delivery class */
@@ -146,22 +147,33 @@ public class Launcher extends Application{
         final BorderPane border = new BorderPane();
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(20));
+        final ArrayList<Button> Thaibuttons = new ArrayList<>();
 
         ArrayList<Place> elements;
         elements = elContent.fetchMainMenu();
         Integer inset = 200;
+
         for (final Place element : elements) {
             final Button myButton = new Button();
             myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
             myButton.setPrefSize(360, 110);
-
+            Thaibuttons.add(myButton);
             /* Set action on main menu buttons */
             myButton.setOnAction( new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event){
-                    myButton.setStyle(" -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0 0 -1 0, 0, 1, 2; " +
-                                      "-fx-background-radius: 3px, 3px, 2px, 1px;" );
+
+                    for(int i = 0; i < Thaibuttons.size(); i++){
+                        Button myButtonHere = new Button();
+                        myButtonHere = Thaibuttons.get(i);
+                        myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+(Thaibuttons.size()-i)+".png');" +
+                                " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
+                        System.out.println(Thaibuttons.get(i));
+                    }
+
+                    myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+"_hover.png');" +
+                            " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
                     ArrayList<Place> myResults = new ArrayList();
                     final displayPresenter presenter = new displayPresenter();
                     Integer subinset = 220;
