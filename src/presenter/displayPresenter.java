@@ -142,7 +142,7 @@ public class displayPresenter {
         textContent.setWrapText(true);
         textContent.setEditable(false);
         textContent.setStyle("-fx-background-color: #f4f4f4;" +
-                " -fx-font-size: 22px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top;");
+                             " -fx-font-size: 22px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top;");
 
         VBox textBox = new VBox();
         textBox.setPadding(new Insets(-80, 80, 0, 0));
@@ -153,7 +153,7 @@ public class displayPresenter {
 
         Label titleLabel  = new Label(pageContent.getName());
         titleLabel.setStyle("-fx-background-color: transparent;" +
-                "-fx-font-size: 45px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700; -fx-padding: 0 0 20 30");
+                            "-fx-font-size: 45px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700; -fx-padding: 0 0 20 30");
 
         HBox titleBox = new HBox();
         titleBox.setPadding(new Insets(100, 0, 100, 200));
@@ -162,7 +162,7 @@ public class displayPresenter {
 
         Label latlongLabel  = new Label(pageContent.getLatlong());
         latlongLabel.setStyle("-fx-background-color: transparent;" +
-                "-fx-font-size: 28px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700;");
+                                "-fx-font-size: 28px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700;");
 
         HBox latlongBox = new HBox();
         latlongBox.setPadding(new Insets(-40, 0, 450, 325));

@@ -117,7 +117,7 @@ public class Launcher extends Application{
         final Button initButton = new Button("TOCA LA PANTALLA PARA INICIAR");
         initButton.setMinWidth(1280);
         initButton.setMinHeight(720);
-        initButton.setStyle("-fx-background-color: transparent; -fx-font-size: 30px; -fx-text-fill: #0b1247; -fx-text-align: center; -fx-font-weight: 900; -fx-padding: 500 0 0 0");
+        initButton.setStyle("-fx-background-color: transparent; -fx-font-size: 36px; -fx-text-fill: #0b1247; -fx-text-align: center; -fx-font-weight: 900; -fx-padding: 800 0 0 0");
         initButton.setOnAction( new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
