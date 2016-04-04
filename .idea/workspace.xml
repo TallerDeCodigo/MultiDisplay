@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a285f68-c3db-4a90-a50d-9e8b301533d6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$1.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$2.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$3.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$4.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$5.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/mediaController.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/mediaController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/model/Place.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/model/Place.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/presenter/displayPresenter.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/presenter/displayPresenter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/views/controllerView.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/views/controllerView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiDisplay1.1.0.iml" afterPath="$PROJECT_DIR$/MultiDisplay1.1.0.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Launcher.java" afterPath="$PROJECT_DIR$/src/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/contentDistribution.java" afterPath="$PROJECT_DIR$/src/controllers/contentDistribution.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/presenter/displayPresenter.java" afterPath="$PROJECT_DIR$/src/presenter/displayPresenter.java" />
     </list>
     <ignored path="MultiDisplay1.1.0.iws" />
@@ -43,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1947">
-              <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
+            <state relative-caret-position="210">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -63,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayPresenter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="displayPresenter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="170" column="42" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+            <state relative-caret-position="75">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -115,10 +97,10 @@
       <list>
         <option value="/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre/lib/jfxrt.jar!/com/sun/t2k/MacFontFinder.class" />
         <option value="$PROJECT_DIR$/src/controllers/mediaController.java" />
-        <option value="$PROJECT_DIR$/src/Launcher.java" />
         <option value="$PROJECT_DIR$/src/model/Place.java" />
         <option value="$PROJECT_DIR$/src/controllers/contentDistribution.java" />
         <option value="$PROJECT_DIR$/src/presenter/displayPresenter.java" />
+        <option value="$PROJECT_DIR$/src/Launcher.java" />
       </list>
     </option>
   </component>
@@ -835,14 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Launcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1947">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -853,8 +827,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="170" column="42" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+        <state relative-caret-position="75">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding />
         </state>
       </provider>

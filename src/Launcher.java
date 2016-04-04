@@ -37,8 +37,8 @@ public class Launcher extends Application{
     private contentDistribution elContent = null;
     int width  = 800;
     int height = 600;
-    //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johm_tdc/Puebla/";
+    final String resources = "file:///C://Puebla/";
+    //final String resources = "file:///Users/johm_tdc/Puebla/";
 
 
     public void start(final Stage primaryStage) throws Exception {

@@ -37,8 +37,8 @@ public class displayPresenter {
 
     private Screen primaryScreen;
     private Screen secondaryScreen;
-    //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johm_tdc/Puebla/";
+    final String resources = "file:///C://Puebla/";
+    //final String resources = "file:///Users/johm_tdc/Puebla/";
 
     public displayPresenter(){
 
