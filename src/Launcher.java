@@ -193,11 +193,11 @@ public class Launcher extends Application{
                             mySubButton.setText(place.getName());
                             mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
                                     " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
-                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 0 20 25 20;");
+                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             if(Integer.parseInt(myButton.getId()) == 5)
                                 mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
                                         " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
-                                        " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 0 20 25 20;");
+                                        " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             mySubButton.setPrefSize(360, 80);
                             //mySubButton.setPadding(new Insets(2,0,2,0));
 

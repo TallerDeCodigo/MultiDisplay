@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a285f68-c3db-4a90-a50d-9e8b301533d6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Launcher.java" afterPath="$PROJECT_DIR$/src/Launcher.java" />
     </list>
     <ignored path="MultiDisplay1.1.0.iws" />
@@ -30,22 +27,9 @@
       <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2705">
-              <caret line="242" column="8" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="8" />
+            <state relative-caret-position="485">
+              <caret line="195" column="155" selection-start-line="195" selection-start-column="155" selection-end-line="195" selection-end-column="155" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Place.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Place.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
-              <folding>
-                <element signature="e#919#920#0" expanded="true" />
-                <element signature="e#944#945#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -809,6 +793,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Place.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -820,18 +812,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2705">
-          <caret line="242" column="8" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="8" />
+        <state relative-caret-position="485">
+          <caret line="195" column="155" selection-start-line="195" selection-start-column="155" selection-end-line="195" selection-end-column="155" />
           <folding />
         </state>
       </provider>
