@@ -38,7 +38,7 @@ public class Launcher extends Application{
     int width  = 800;
     int height = 600;
     //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johm_tdc/Puebla/";
+    final String resources = "file:///Users/johnfalcon/Puebla/";
 
 
     public void start(final Stage primaryStage) throws Exception {
@@ -152,13 +152,15 @@ public class Launcher extends Application{
         ArrayList<Place> elements;
         elements = elContent.fetchMainMenu();
         Integer inset = 200;
-
+        Integer index = 0;
         for (final Place element : elements) {
             final Button myButton = new Button();
             myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
             myButton.setPrefSize(360, 110);
-            Thaibuttons.add(myButton);
+            myButton.setId(element.getId().toString());
+            Thaibuttons.add(index, myButton);
+            index++;
             /* Set action on main menu buttons */
             myButton.setOnAction( new EventHandler<ActionEvent>() {
                 @Override
@@ -167,7 +169,7 @@ public class Launcher extends Application{
                     for(int i = 0; i < Thaibuttons.size(); i++){
                         Button myButtonHere = new Button();
                         myButtonHere = Thaibuttons.get(i);
-                        myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+(Thaibuttons.size()-i)+".png');" +
+                        myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+myButtonHere.getId()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
                         System.out.println(Thaibuttons.get(i));
                     }
@@ -191,7 +193,11 @@ public class Launcher extends Application{
                             mySubButton.setText(place.getName());
                             mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
                                     " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
-                                    " -fx-font-size: 16px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 0 30 25 30;");
+                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+                            if(Integer.parseInt(myButton.getId()) == 5)
+                                mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
+                                        " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                        " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             mySubButton.setPrefSize(360, 80);
                             //mySubButton.setPadding(new Insets(2,0,2,0));
 
@@ -230,9 +236,9 @@ public class Launcher extends Application{
             });
             vbox.getChildren().add(myButton);
             VBox.setMargin(myButton, new Insets(5, 0, 0, inset));
-            if(element.getId() <= 4)
+            if(index <= 4)
                 inset = inset-50;
-            if(element.getId() >= 4)
+            if(index > 4)
                 inset = inset+50;
         }
         vbox.setAlignment(Pos.CENTER);
