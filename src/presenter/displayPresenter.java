@@ -38,7 +38,7 @@ public class displayPresenter {
     private Screen primaryScreen;
     private Screen secondaryScreen;
     //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johnfalcon/Puebla/";
+    final String resources = "file:///Users/johm_tdc/Puebla/";
 
     public displayPresenter(){
 
@@ -138,19 +138,22 @@ public class displayPresenter {
         TextArea textContent = new TextArea();
         textContent.setText(pageContent.getDescription());
         textContent.setPrefColumnCount(60);
-        textContent.setMinHeight(700);
+        textContent.setMinHeight(600);
         textContent.setWrapText(true);
         textContent.setEditable(false);
-        textContent.setStyle("-fx-background-color: #f4f4f4;" +
-                             " -fx-font-size: 22px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top;");
-
+        textContent.setStyle("-fx-background-color: #f4f4f4; -fx-line-spacing: 1em;" +
+                             " -fx-font-size: 20px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top;");
+        Label detailsLabel = new Label(pageContent.getDetails());
+        detailsLabel.setStyle("-fx-background-color: #f4f4f4;" +
+                              " -fx-font-size: 18px;  -fx-text-align: left; -fx-font-weight: 900; -fx-text-origin: top;");
+        detailsLabel.setPadding(new Insets(-80, 0, 0, 0));
+        detailsLabel.setPrefWidth(500);
         VBox textBox = new VBox();
         textBox.setPadding(new Insets(-80, 80, 0, 0));
         textBox.setPrefWidth(620);
 
         textBox.setAlignment(Pos.CENTER_RIGHT);
-        textBox.getChildren().add(textContent);
-
+        textBox.getChildren().addAll(textContent,detailsLabel);
         Label titleLabel  = new Label(pageContent.getName());
         titleLabel.setStyle("-fx-background-color: transparent;" +
                             "-fx-font-size: 45px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700; -fx-padding: 0 0 20 30");
@@ -162,28 +165,25 @@ public class displayPresenter {
 
         Label latlongLabel  = new Label(pageContent.getLatlong());
         latlongLabel.setStyle("-fx-background-color: transparent;" +
-                                "-fx-font-size: 28px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700;");
+                              "-fx-font-size: 28px; -fx-text-fill: #004987; -fx-text-align: center; -fx-font-weight: 700;");
 
         HBox latlongBox = new HBox();
-        latlongBox.setPadding(new Insets(-40, 0, 450, 325));
+        latlongBox.setPadding(new Insets(30, 0, 450, 325));
         latlongBox.setAlignment(Pos.BOTTOM_LEFT);
         latlongBox.getChildren().add(latlongLabel);
-
 
         borderKane.setRight(textBox);
         borderKane.setTop(titleBox);
         borderKane.setBottom(latlongBox);
-        //borderKane.setCenter();
 
         //borderKane.setMargin(textContent, new Insets(120,200,0,0));
         if(!pageContent.getVideo().equals("")){
             MediaView theView = mediaDude.loadVideo(resources+"content/"+pageContent.getVideo(), null, true, true);
             theView.setViewport(new Rectangle2D(0,0,1080,608));
             borderKane.setCenter(theView);
-            borderKane.setMargin(theView, new Insets(-150,0,18,200));
+            borderKane.setMargin(theView, new Insets(-60,0,18,200));
         }else{
             ImageView theView = mediaDude.loadImage(resources+"content/"+pageContent.getImage());
-            //theView.setStyle("-fx-opacity: 0.6;");
             theView.setViewport(new Rectangle2D(0,0,1080,608));
             borderKane.setMargin(theView, new Insets(-170,0,0,200));
             borderKane.setCenter(theView);

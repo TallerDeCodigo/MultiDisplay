@@ -38,7 +38,7 @@ public class Launcher extends Application{
     int width  = 800;
     int height = 600;
     //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johnfalcon/Puebla/";
+    final String resources = "file:///Users/johm_tdc/Puebla/";
 
 
     public void start(final Stage primaryStage) throws Exception {
@@ -148,6 +148,7 @@ public class Launcher extends Application{
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(20));
         final ArrayList<Button> Thaibuttons = new ArrayList<>();
+        final ArrayList<Button> Thosebuttons = new ArrayList<>();
 
         ArrayList<Place> elements;
         elements = elContent.fetchMainMenu();
@@ -171,7 +172,6 @@ public class Launcher extends Application{
                         myButtonHere = Thaibuttons.get(i);
                         myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+myButtonHere.getId()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
-                        System.out.println(Thaibuttons.get(i));
                     }
 
                     myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+"_hover.png');" +
@@ -188,7 +188,7 @@ public class Launcher extends Application{
                         myResults = presenter.insertMenu("submenu", element.getId());
                         Integer index = 0;
                         for (final Place place : myResults) {
-                            Button mySubButton = new Button();
+                            final Button mySubButton = new Button();
                             mySubButton.setWrapText(true);
                             mySubButton.setText(place.getName());
                             mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
@@ -200,11 +200,21 @@ public class Launcher extends Application{
                                         " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             mySubButton.setPrefSize(360, 80);
                             //mySubButton.setPadding(new Insets(2,0,2,0));
-
+                            Thosebuttons.add(mySubButton);
                             /* Set action on submenu buttons */
                             mySubButton.setOnAction( new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent event) {
+                                    for(int i = 0; i < Thosebuttons.size(); i++){
+                                        Button myButtonHere = new Button();
+                                        myButtonHere = Thosebuttons.get(i);
+                                        myButtonHere.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
+                                                " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                                " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+                                    }
+                                    mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu_hover.png');" +
+                                            " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                            " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                                     try {
                                         Scene newScene = presenter.showDetail(place.getId());
                                         primaryStage.setScene(newScene);

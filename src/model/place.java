@@ -13,6 +13,7 @@ public class Place {
     String image;
     String video;
     String description;
+    String details;
     Integer group;
     Integer order;
     Boolean cluster;
@@ -35,6 +36,7 @@ public class Place {
         this.setImage(null);
         this.setVideo(null);
         this.setDescription(null);
+        this.setDetails(null);
         this.setGroup(null);
     }
 
@@ -109,4 +111,13 @@ public class Place {
     public void setOrder(Integer order) {
         this.order = order;
     }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
 }

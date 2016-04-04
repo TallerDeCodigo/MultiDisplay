@@ -4,6 +4,8 @@ import model.Place;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static com.sun.tools.internal.xjc.reader.Ring.add;
+
 
 /**
  * Content distribution class to manage operations with database
@@ -71,7 +73,6 @@ public class contentDistribution {
                     myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
                     myPlace.setCluster(true);
-                    System.out.println(result.getString("name"));
                     resultSet.add(myPlace);
                 }
             }
@@ -133,6 +134,7 @@ public class contentDistribution {
                     myPlace.setImage(result.getString("image"));
                     myPlace.setVideo(result.getString("video"));
                     myPlace.setLatlong(result.getString("latlong"));
+                    myPlace.setDetails(result.getString("details"));
                     return myPlace;
                 }
             statement.close();
