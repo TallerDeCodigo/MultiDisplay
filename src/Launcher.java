@@ -38,7 +38,7 @@ public class Launcher extends Application{
     int width  = 800;
     int height = 600;
     //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johm_tdc/Puebla/";
+    final String resources = "file:///Users/johnfalcon/Puebla/";
 
 
     public void start(final Stage primaryStage) throws Exception {
@@ -152,13 +152,15 @@ public class Launcher extends Application{
         ArrayList<Place> elements;
         elements = elContent.fetchMainMenu();
         Integer inset = 200;
-
+        Integer index = 0;
         for (final Place element : elements) {
             final Button myButton = new Button();
             myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
             myButton.setPrefSize(360, 110);
-            Thaibuttons.add(myButton);
+            myButton.setId(element.getId().toString());
+            Thaibuttons.add(index, myButton);
+            index++;
             /* Set action on main menu buttons */
             myButton.setOnAction( new EventHandler<ActionEvent>() {
                 @Override
@@ -167,7 +169,7 @@ public class Launcher extends Application{
                     for(int i = 0; i < Thaibuttons.size(); i++){
                         Button myButtonHere = new Button();
                         myButtonHere = Thaibuttons.get(i);
-                        myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+(Thaibuttons.size()-i)+".png');" +
+                        myButtonHere.setStyle( "-fx-background-image: url('"+resources+"resources/bg_"+myButtonHere.getId()+".png');" +
                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
                         System.out.println(Thaibuttons.get(i));
                     }

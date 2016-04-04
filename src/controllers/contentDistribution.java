@@ -71,7 +71,7 @@ public class contentDistribution {
                     myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
                     myPlace.setCluster(true);
-
+                    System.out.println(result.getString("name"));
                     resultSet.add(myPlace);
                 }
             }
