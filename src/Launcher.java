@@ -37,8 +37,8 @@ public class Launcher extends Application{
     private contentDistribution elContent = null;
     int width  = 800;
     int height = 600;
-    final String resources = "file:///C://Puebla/";
-    //final String resources = "file:///Users/johm_tdc/Puebla/";
+    //final String resources = "file:///C://Puebla/";
+    final String resources = "file:///Users/johm_tdc/Puebla/";
 
 
     public void start(final Stage primaryStage) throws Exception {
@@ -118,7 +118,7 @@ public class Launcher extends Application{
         final Button initButton = new Button("TOCA LA PANTALLA PARA INICIAR");
         initButton.setMinWidth(1280);
         initButton.setMinHeight(720);
-        initButton.setStyle("-fx-background-color: transparent; -fx-font-size: 36px; -fx-text-fill: #0b1247; -fx-text-align: center; -fx-font-weight: 900; -fx-padding: 800 0 0 0");
+        initButton.setStyle("-fx-background-color: transparent; -fx-font-size: 36px; -fx-text-fill: #0b1247; -fx-text-align: center; -fx-font-weight: 900; -fx-padding: 780 0 0 0");
         initButton.setOnAction( new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
@@ -178,26 +178,31 @@ public class Launcher extends Application{
                             " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
                     ArrayList<Place> myResults = new ArrayList();
                     final displayPresenter presenter = new displayPresenter();
-                    Integer subinset = 220;
-                    Integer subpadding= 30;
+                    Integer subinset    = 220;
+                    Integer subpadding  = 30;
                     try {
                         VBox vbox = new VBox();
                         vbox.setPadding(new Insets(20));
-                        Scene newScene = presenter.showStby();
-                        primaryStage.setScene(newScene);
                         myResults = presenter.insertMenu("submenu", element.getId());
                         Integer index = 0;
+
+                        Scene newScene = presenter.showStby(null);
+                        if(Integer.parseInt(myButton.getId()) == 1 || Integer.parseInt(myButton.getId()) == 6)
+                            newScene = presenter.showStby("estado");
+
+                        primaryStage.setScene(newScene);
+
                         for (final Place place : myResults) {
                             final Button mySubButton = new Button();
                             mySubButton.setWrapText(true);
                             mySubButton.setText(place.getName());
                             mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
-                                    " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
-                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+                                                " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                                " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             if(Integer.parseInt(myButton.getId()) == 5)
                                 mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
-                                        " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
-                                        " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+                                                    " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             mySubButton.setPrefSize(360, 80);
                             //mySubButton.setPadding(new Insets(2,0,2,0));
                             Thosebuttons.add(mySubButton);

@@ -135,6 +135,8 @@ public class contentDistribution {
                     myPlace.setVideo(result.getString("video"));
                     myPlace.setLatlong(result.getString("latlong"));
                     myPlace.setDetails(result.getString("details"));
+                    myPlace.setAddress(result.getString("address"));
+                    myPlace.setLocation(result.getString("location"));
                     return myPlace;
                 }
             statement.close();

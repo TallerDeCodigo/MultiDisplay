@@ -14,6 +14,8 @@ public class Place {
     String video;
     String description;
     String details;
+    String address;
+    String location;
     Integer group;
     Integer order;
     Boolean cluster;
@@ -37,6 +39,7 @@ public class Place {
         this.setVideo(null);
         this.setDescription(null);
         this.setDetails(null);
+        this.setAddress(null);
         this.setGroup(null);
     }
 
@@ -120,4 +123,19 @@ public class Place {
         this.details = details;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
