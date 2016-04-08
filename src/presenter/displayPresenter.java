@@ -37,8 +37,8 @@ public class displayPresenter {
 
     private Screen primaryScreen;
     private Screen secondaryScreen;
-    //final String resources = "file:///C://Puebla/";
-    final String resources = "file:///Users/johm_tdc/Puebla/";
+    final String resources = "file:///C://Puebla/";
+    //final String resources = "file:///Users/johm_tdc/Puebla/";
 
     public displayPresenter(){
 
@@ -155,14 +155,14 @@ public class displayPresenter {
         TextArea textContent = new TextArea();
             textContent.setText(pageContent.getDescription());
             textContent.setPrefColumnCount(60);
-            textContent.setMinHeight(600);
+            textContent.setMinHeight(575);
             textContent.setWrapText(true);
             textContent.setEditable(false);
             textContent.setStyle("-fx-background-color: #f4f4f4; -fx-line-spacing: 1em;" +
-                                " -fx-font-size: 20px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top; -fx-padding: 20 0 0 0;");
+                                " -fx-font-size: 19px;  -fx-text-align: left; -fx-font-weight: 500; -fx-text-origin: top; -fx-padding: 20 0 0 0;");
         Label detailsLabel = new Label(pageContent.getDetails());
             detailsLabel.setStyle("-fx-background-color: #f4f4f4;" +
-                                  " -fx-font-size: 16px;  -fx-text-align: left; -fx-font-weight: 700; -fx-text-origin: top; -fx-padding: 0 0 0 15;");
+                                  " -fx-font-size: 16px;  -fx-text-align: left; -fx-font-weight: 700; -fx-text-origin: top; -fx-padding: 0 0 0 0;");
             detailsLabel.setPadding(new Insets(-80, 0, 0, 0));
             detailsLabel.setPrefWidth(640);
 

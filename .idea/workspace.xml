@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a285f68-c3db-4a90-a50d-9e8b301533d6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/MultiDisplay1_1_0_jar/MultiDisplay1.1.0.jar" afterPath="$PROJECT_DIR$/out/artifacts/MultiDisplay1_1_0_jar/MultiDisplay1.1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/Launcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/controllers/contentDistribution.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/model/Place.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/model/Place.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/presenter/displayPresenter.class" afterPath="$PROJECT_DIR$/out/production/MultiDisplay1.1.0/presenter/displayPresenter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Launcher.java" afterPath="$PROJECT_DIR$/src/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/contentDistribution.java" afterPath="$PROJECT_DIR$/src/controllers/contentDistribution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/place.java" afterPath="$PROJECT_DIR$/src/model/place.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/presenter/displayPresenter.java" afterPath="$PROJECT_DIR$/src/presenter/displayPresenter.java" />
     </list>
     <ignored path="MultiDisplay1.1.0.iws" />
@@ -35,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="196" column="58" selection-start-line="196" selection-start-column="58" selection-end-line="196" selection-end-column="58" />
+            <state relative-caret-position="210">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -48,18 +39,18 @@
       <file leaf-file-name="mediaController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
+            <state relative-caret-position="435">
               <caret line="33" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayPresenter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="displayPresenter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="161" column="137" selection-start-line="161" selection-start-column="137" selection-end-line="161" selection-end-column="137" />
+            <state relative-caret-position="225">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -68,7 +59,7 @@
       <file leaf-file-name="contentDistribution.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controllers/contentDistribution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="643">
+            <state relative-caret-position="2010">
               <caret line="138" column="70" selection-start-line="138" selection-start-column="70" selection-end-line="138" selection-end-column="70" />
               <folding />
             </state>
@@ -78,9 +69,12 @@
       <file leaf-file-name="Place.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Place.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1335">
+            <state relative-caret-position="672">
               <caret line="135" column="5" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="5" />
-              <folding />
+              <folding>
+                <element signature="e#2611#2612#0" expanded="true" />
+                <element signature="e#2642#2643#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,8 +96,8 @@
         <option value="$PROJECT_DIR$/src/controllers/mediaController.java" />
         <option value="$PROJECT_DIR$/src/model/Place.java" />
         <option value="$PROJECT_DIR$/src/controllers/contentDistribution.java" />
-        <option value="$PROJECT_DIR$/src/Launcher.java" />
         <option value="$PROJECT_DIR$/src/presenter/displayPresenter.java" />
+        <option value="$PROJECT_DIR$/src/Launcher.java" />
       </list>
     </option>
   </component>
@@ -494,6 +488,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="33" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1245">
@@ -514,7 +524,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1335">
           <caret line="135" column="5" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2642#2643#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -754,23 +767,34 @@
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre/lib/jfxrt.jar!/com/sun/t2k/MacFontFinder.class" />
     <entry file="file://$PROJECT_DIR$/src/model/Place.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
+        <state relative-caret-position="672">
           <caret line="135" column="5" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2642#2643#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/contentDistribution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
+        <state relative-caret-position="2010">
           <caret line="138" column="70" selection-start-line="138" selection-start-column="70" selection-end-line="138" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/mediaController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
+        <state relative-caret-position="435">
           <caret line="33" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="26" />
           <folding />
         </state>
@@ -778,16 +802,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="196" column="58" selection-start-line="196" selection-start-column="58" selection-end-line="196" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/presenter/displayPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="161" column="137" selection-start-line="161" selection-start-column="137" selection-end-line="161" selection-end-column="137" />
+        <state relative-caret-position="210">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding />
         </state>
       </provider>
