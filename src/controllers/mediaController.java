@@ -13,8 +13,6 @@ import javafx.scene.media.MediaView;
  */
 public class mediaController {
 
-    private static final String Media_Url = "";
-
     public mediaController(){
 
     }

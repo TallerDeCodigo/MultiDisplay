@@ -14,18 +14,26 @@ import static com.sun.tools.internal.xjc.reader.Ring.add;
  */
 public class contentDistribution {
 
-    private String connection_url = "jdbc:mysql://127.0.0.1:3306/puebla_interactive?autoReconnect=true&useSSL=false";
-    private String username       = "root";
-    private String password       = "root";
-    private Connection connection = null;
+    private String connection_url;
+    private String username;
+    private String password;
+    private Connection connection;
 
     public contentDistribution(String connection_url, String username, String password){
-        this.connection_url =  (connection_url != null) ? connection_url : this.connection_url;
-        this.username = (username != null) ? username : this.username;
-        this.password = (password != null) ? password : this.password;
+        this.connection_url =  (connection_url != null) ? connection_url : "jdbc:mysql://127.0.0.1:3306/puebla_interactive?autoReconnect=true&useSSL=false";
+        this.username = (username != null) ? username : "root";
+        this.password = (password != null) ? password : "root";
         if(this.connection != null){
             connectDB();
         }
+    }
+
+    public contentDistribution(){
+        this.connection_url =  "jdbc:mysql://127.0.0.1:3306/puebla_interactive?autoReconnect=true&useSSL=false";
+        this.username = "root";
+        this.password = "root";
+        this.connection = null;
+        connectDB();
     }
 
     /**
@@ -44,11 +52,11 @@ public class contentDistribution {
             try{
                 Connection aconnection = DriverManager.getConnection(connection_url, username, password);
                 this.connection = aconnection;
-                System.out.println("Database connected!");
+                System.out.println("Database connected, we got the beans");
                 return this.connection;
             } catch (SQLException e) {
 
-                throw new IllegalStateException("Cannot connect the database!", e);
+                throw new IllegalStateException("Sowwy, cannot connect the database!", e);
             }
         return this.connection;
     }
@@ -80,7 +88,7 @@ public class contentDistribution {
             return resultSet;
         }catch(SQLException e){
             e.printStackTrace();
-            throw new SQLException("Error executing query", e);
+            throw new SQLException("Error executing main menu query", e);
         }
     }
 
@@ -96,8 +104,8 @@ public class contentDistribution {
             ResultSet result = statement.executeQuery();
             if(result != null)
                 while(result.next()) {
-                    Place myPlace = new Place();
 
+                    Place myPlace = new Place();
                     myPlace.setId(result.getInt("id"));
                     myPlace.setGroup(result.getInt("_order"));
                     myPlace.setName(result.getString("name"));
@@ -111,7 +119,7 @@ public class contentDistribution {
             statement.close();
             return resultSet;
         }catch(SQLException e){
-            throw new SQLException("Error executing query", e);
+            throw new SQLException("Error executing submenu query", e);
         }
     }
 
@@ -126,6 +134,7 @@ public class contentDistribution {
             ResultSet result = statement.executeQuery();
             if(result != null)
                 while(result.next()) {
+                    // Forms new Place object
                     Place myPlace = new Place();
                     myPlace.setId(result.getInt("id"));
                     myPlace.setGroup(result.getInt("_order"));
@@ -141,7 +150,7 @@ public class contentDistribution {
                 }
             statement.close();
         }catch(SQLException e){
-            throw new SQLException("Error executing query", e);
+            throw new SQLException("Error executing detail query", e);
         }
         return new Place();
     }

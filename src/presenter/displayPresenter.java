@@ -1,5 +1,6 @@
 package presenter;
 import controllers.mediaController;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -24,6 +26,7 @@ import java.util.Objects;
 import controllers.contentDistribution;
 import javafx.stage.StageStyle;
 import model.Place;
+import sun.misc.Launcher;
 
 /**
  * Presenter to manage multiple display application
@@ -32,16 +35,21 @@ import model.Place;
  */
 public class displayPresenter {
 
-    int width   = 800;
-    int height  = 600;
+    double widthPrimary;
+    double widthSecondary;
+    double heightPrimary;
+    double heightSecondary;
 
     private Screen primaryScreen;
     private Screen secondaryScreen;
-    final String resources = "file:///C://Puebla/";
-    //final String resources = "file:///Users/johm_tdc/Puebla/";
+    Rectangle2D primaryScreenBounds;
+    Rectangle2D secondaryScreenBounds;
+
+    //final String resources = "file:///C://Puebla/";
+    final String resources = "file:///Users/johm_tdc/Puebla/";
 
     public displayPresenter(){
-
+        this.detectDisplays();
     }
 
     /**
@@ -63,20 +71,30 @@ public class displayPresenter {
     public void detectDisplays(){
         final Screen primaryScreen = Screen.getPrimary();
         final List<Screen> allScreens = Screen.getScreens();
-        // Screen secondaryScreen;
+
         this.primaryScreen = primaryScreen;
         if (allScreens.size() <= 1) {
-            System.out.println("Only one screen detected, using the same output");
+            System.out.println("DisplayPresenter ::: Only one screen detected, using the same output");
             this.primaryScreen      = primaryScreen;
             this.secondaryScreen    = primaryScreen;
         } else {
-            System.out.println("Both screens working");
+            System.out.println("DisplayPresenter ::: Both screens working");
             if (allScreens.get(0).equals(primaryScreen)) {
                 this.secondaryScreen = allScreens.get(1);
             } else {
                 this.secondaryScreen = allScreens.get(0);
             }
         }
+        this.primaryScreenBounds     = this.primaryScreen.getVisualBounds();
+        this.secondaryScreenBounds   = this.secondaryScreen.getVisualBounds();
+
+        /* Set Viewport window dimensions */
+        widthPrimary  = this.primaryScreenBounds.getWidth();
+        heightPrimary = this.primaryScreenBounds.getHeight();
+
+        /* Set Controller window dimensions */
+        widthSecondary  = this.secondaryScreenBounds.getWidth();
+        heightSecondary = this.secondaryScreenBounds.getHeight();
     }
 
     /**
@@ -85,7 +103,7 @@ public class displayPresenter {
      */
     public ArrayList insertMenu( String menuName, Integer group ) throws SQLException {
 
-        contentDistribution elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
+        contentDistribution elContent = new contentDistribution();
         ArrayList menuItems = new ArrayList();
         if(Objects.equals(menuName, "main")){
             menuItems = elContent.fetchMainMenu();
@@ -114,27 +132,37 @@ public class displayPresenter {
     }
 
     /**
-     * Show stand by panoramic
+     * Show start panoramic scene
      * @return Scene
      */
-    public Scene showInit(){
-        Integer width = 800;
-        Integer height = 600;
+    public void showScreensaver(Stage someStage, double width, double height){
         BorderPane borderKane = new BorderPane();
-        borderKane.setStyle("-fx-background-image: url('"+resources+"resources/panorama.jpg'); -fx-background-repeat: stretch;");
-        return new Scene(borderKane, width, height) ;
+        /* Initialize media manager */
+        mediaController mediaCtrlr = new mediaController();
+        final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", borderKane, true, true );
+        theViewportView.setFitWidth(width);
+        theViewportView.setFitHeight(height);
+
+        someStage.setX(getPrimaryScreenBounds().getMinX());
+        someStage.setY(getPrimaryScreenBounds().getMinY());
+        borderKane.getChildren().add(theViewportView);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    someStage.setScene( new Scene(borderKane, width, height) );
+                }
+            });
     }
 
     /**
      * Fetch detailed information about a place
-     * Returns new Scene
      * @return Scene
      */
     public Scene showDetail(Integer place_id) throws SQLException {
         Integer width = 800;
         Integer height = 600;
         BorderPane borderKane = new BorderPane();
-        contentDistribution elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
+        contentDistribution elContent = new contentDistribution();
         Place pageContent = elContent.fetchDetail(place_id);
         mediaController mediaDude = new mediaController();
 
@@ -217,6 +245,30 @@ public class displayPresenter {
 
     public Screen getSecondaryScreen(){
         return this.secondaryScreen;
+    }
+
+    public double getWidthPrimary() {
+        return widthPrimary;
+    }
+
+    public double getWidthSecondary() {
+        return widthSecondary;
+    }
+
+    public double getHeightPrimary() {
+        return heightPrimary;
+    }
+
+    public double getHeightSecondary() {
+        return heightSecondary;
+    }
+
+    public Rectangle2D getPrimaryScreenBounds() {
+        return primaryScreenBounds;
+    }
+
+    public Rectangle2D getSecondaryScreenBounds() {
+        return secondaryScreenBounds;
     }
 
 }

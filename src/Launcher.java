@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,109 +11,128 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
-import javafx.geometry.Rectangle2D;
-import controllers.mediaController;
-import controllers.contentDistribution;
 import javafx.stage.StageStyle;
-import model.Place;
-import presenter.displayPresenter;
 import javafx.event.ActionEvent;
-
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import controllers.mediaController;
+import controllers.contentDistribution;
+import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
+import presenter.displayPresenter;
+import model.Place;
 
 /**
  * Main Class to launch application
  * @author John Falcon
+ * @version 1.0.2
  */
 public class Launcher extends Application{
 
-    final StackPane stackPrimary = new StackPane();
-    final StackPane stackSecondary = new StackPane();
+    final StackPane stackPrimary    = new StackPane();
+    final StackPane stackSecondary  = new StackPane();
     private contentDistribution elContent = null;
-    int width  = 800;
-    int height = 600;
-    final String resources = "file:///C://Puebla/";
-    //final String resources = "file:///Users/johm_tdc/Puebla/";
+    private displayPresenter presenter;
+    Rectangle2D primaryScreenBounds;
+    Rectangle2D secondaryScreenBounds;
+    double widthPrimary     = 0;
+    double heightPrimary    = 0;
+    double widthSecondary   = 0;
+    double heightSecondary  = 0;
+    private Timer restMode;
+    //final String resources = "file:///C://Puebla/";
+    final String resources = "file:///Users/johm_tdc/Puebla/";
 
+    public void init(){
+        System.out.println("Launcher ::: Initializing...");
+
+        /* Initialize presenter and detect displays */
+        presenter = new displayPresenter();
+
+        Screen myPrimaryScreen   = presenter.getPrimaryScreen();
+        Screen mySecondaryScreen = presenter.getSecondaryScreen();
+
+        /* Set Viewport window dimensions */
+        primaryScreenBounds = myPrimaryScreen.getVisualBounds();
+        widthPrimary  = presenter.getWidthPrimary();
+        heightPrimary = presenter.getHeightPrimary();
+
+        /* Set Controller window dimensions */
+        secondaryScreenBounds = mySecondaryScreen.getVisualBounds();
+        widthSecondary  = presenter.getWidthSecondary();
+        heightSecondary = presenter.getHeightSecondary();
+
+    }
 
     public void start(final Stage primaryStage) throws Exception {
-
+        System.out.println("Launcher ::: Starting engines");
         /* Initialize content delivery class */
-        elContent = new contentDistribution("jdbc:mysql://localhost:3306/puebla_interactive", null, null);
+        elContent = new contentDistribution();
 
         /* Initialize media manager */
         mediaController mediaCtrlr = new mediaController();
 
-        /* Initialize presenter and detect displays */
-        displayPresenter presenter = new displayPresenter();
+        Scene sceneViewport = new Scene(stackPrimary, widthPrimary, heightPrimary);
+            primaryStage.setScene(sceneViewport);
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.setTitle("Mirador interactivo Puebla - Viewport");
+            primaryStage.setX(primaryScreenBounds.getMinX());
+            primaryStage.setY(primaryScreenBounds.getMinY());
+            primaryStage.setWidth(widthPrimary);
+            primaryStage.setHeight(heightPrimary);
 
-        presenter.detectDisplays();
-        Screen myPrimaryScreen = presenter.getPrimaryScreen();
-        Screen mySecondaryScreen = presenter.getSecondaryScreen();
-
-        /* Set Viewport window dimensions */
-        Rectangle2D primaryScreenBounds = myPrimaryScreen.getVisualBounds();
-
-        Scene sceneViewport = new Scene(stackPrimary, width, height);
-        primaryStage.setScene(sceneViewport);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Mirador interactivo Puebla - Viewport");
-        primaryStage.setX(primaryScreenBounds.getMinX());
-        primaryStage.setY(primaryScreenBounds.getMinY());
-        primaryStage.setWidth(primaryScreenBounds.getWidth());
-        primaryStage.setHeight(primaryScreenBounds.getHeight());
-
-        /* Set Controller window dimensions */
-        Rectangle2D secondaryScreenBounds = mySecondaryScreen.getVisualBounds();
         final Stage secondStageTurbineBlade = new Stage();
 
-        secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
-        secondStageTurbineBlade.setTitle("Mirador interactivo Puebla - Controller Surface");
-        secondStageTurbineBlade.setX(secondaryScreenBounds.getMinX());
-        secondStageTurbineBlade.setY(secondaryScreenBounds.getMinY());
-        secondStageTurbineBlade.setWidth(secondaryScreenBounds.getWidth());
-        secondStageTurbineBlade.setHeight(secondaryScreenBounds.getHeight());
+            secondStageTurbineBlade.initStyle(StageStyle.TRANSPARENT);
+            secondStageTurbineBlade.setTitle("Mirador interactivo Puebla - Controller Surface");
+            secondStageTurbineBlade.setX(secondaryScreenBounds.getMinX());
+            secondStageTurbineBlade.setY(secondaryScreenBounds.getMinY());
+            secondStageTurbineBlade.setWidth(widthSecondary);
+            secondStageTurbineBlade.setHeight(heightSecondary);
 
         /* Add elements to Viewport screen */
         final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", stackPrimary, true, true );
+            theViewportView.setFitWidth(widthPrimary);
+            theViewportView.setFitHeight(heightPrimary);
+        stackPrimary.getChildren().removeAll();
         stackPrimary.getChildren().add(theViewportView);
 
-        stackPrimary.widthProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                theViewportView.setFitWidth(stackPrimary.getWidth());
-            }
-        });
+           /* stackPrimary.widthProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    System.out.println("widthPrimary");
+                    theViewportView.setFitWidth(widthPrimary);
+                }
+            });
 
-        stackPrimary.heightProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                theViewportView.setFitHeight(stackPrimary.getHeight());
-            }
-        });
+            stackPrimary.heightProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    System.out.println("heightPrimary");
+                    theViewportView.setFitHeight(heightPrimary);
+                }
+            });*/
 
         /* Add elements to Controller surface */
         final MediaView theCompassView = mediaCtrlr.loadVideo( resources+"loop-brujula.mp4", stackSecondary, true, true );
 
-        stackSecondary.widthProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                theCompassView.setFitWidth(stackSecondary.getWidth());
-            }
-        });
+            stackSecondary.widthProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    theCompassView.setFitWidth(widthSecondary);
+                }
+            });
 
-        stackSecondary.heightProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                theCompassView.setFitHeight(stackSecondary.getHeight());
-            }
-        });
+            stackSecondary.heightProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    theCompassView.setFitHeight(heightSecondary);
+                }
+            });
 
 
         final Button initButton = new Button("TOCA LA PANTALLA PARA INICIAR");
@@ -127,8 +147,6 @@ public class Launcher extends Application{
                     boxes = addBoxes(primaryStage);
                     stackSecondary.getChildren().remove(initButton);
                     stackSecondary.getChildren().add(boxes);
-                    Scene sceneSurface = new Scene(stackSecondary, width, height);
-                    secondStageTurbineBlade.setScene(sceneSurface);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -136,7 +154,7 @@ public class Launcher extends Application{
         });
 
         stackSecondary.getChildren().addAll(theCompassView, initButton);
-        Scene sceneSurface = new Scene(stackSecondary, width, height);
+        Scene sceneSurface = new Scene(stackSecondary, widthSecondary, heightSecondary);
         secondStageTurbineBlade.setScene(sceneSurface);
 
         primaryStage.show();
@@ -154,6 +172,8 @@ public class Launcher extends Application{
         elements = elContent.fetchMainMenu();
         Integer inset = 200;
         Integer index = 0;
+        restMode = new Timer();
+
         for (final Place element : elements) {
             final Button myButton = new Button();
             myButton.setStyle(  "-fx-background-image: url('"+resources+"resources/bg_"+element.getId().toString()+".png');" +
@@ -204,7 +224,7 @@ public class Launcher extends Application{
                                                     " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
                                                     " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                             mySubButton.setPrefSize(360, 80);
-                            //mySubButton.setPadding(new Insets(2,0,2,0));
+
                             Thosebuttons.add(mySubButton);
                             /* Set action on submenu buttons */
                             mySubButton.setOnAction( new EventHandler<ActionEvent>() {
@@ -222,6 +242,17 @@ public class Launcher extends Application{
                                             " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                                     try {
                                         Scene newScene = presenter.showDetail(place.getId());
+                                        //System.out.println(primaryStage.getScene());
+                                        System.gc();
+                                        // Entering stby mode after 5 minutes of inactivity
+                                        restMode.schedule(new TimerTask() {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("Entering stby modo");
+                                                presenter.showScreensaver(primaryStage, widthPrimary, heightPrimary);
+                                            }
+                                        }, 10000);
+                                        // 300000
                                         primaryStage.setScene(newScene);
                                     } catch (SQLException e) {
                                         e.printStackTrace();
