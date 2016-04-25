@@ -136,16 +136,17 @@ public class displayPresenter {
      * @return Scene
      */
     public void showScreensaver(Stage someStage, double width, double height){
-        BorderPane borderKane = new BorderPane();
+       BorderPane borderKane = new BorderPane();
         /* Initialize media manager */
-        mediaController mediaCtrlr = new mediaController();
+        /*mediaController mediaCtrlr = new mediaController();
         final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", borderKane, true, true );
         theViewportView.setFitWidth(width);
         theViewportView.setFitHeight(height);
 
         someStage.setX(getPrimaryScreenBounds().getMinX());
         someStage.setY(getPrimaryScreenBounds().getMinY());
-        borderKane.getChildren().add(theViewportView);
+        borderKane.getChildren().add(theViewportView);*/
+        borderKane.setStyle("-fx-background-image: url('"+resources+"resources/bg_transparente.gif'); -fx-background-size: contain; -fx-background-repeat: stretch;");
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -210,7 +211,7 @@ public class displayPresenter {
                                 "-fx-font-size: 16px; -fx-text-fill: #EE7600; -fx-text-align: center; -fx-font-weight: 300; -fx-padding: 10 0 0 12;");
 
         VBox latlongBox = new VBox();
-            latlongBox.setPadding(new Insets(30, 0, 450, 193));
+            latlongBox.setPadding(new Insets(5, 0, 450, 193));
             latlongBox.setAlignment(Pos.BOTTOM_LEFT);
             latlongBox.getChildren().addAll(latlongLabel, addrLabel);
 

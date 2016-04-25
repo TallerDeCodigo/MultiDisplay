@@ -4,8 +4,6 @@ import model.Place;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static com.sun.tools.internal.xjc.reader.Ring.add;
-
 
 /**
  * Content distribution class to manage operations with database

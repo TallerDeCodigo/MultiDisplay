@@ -41,9 +41,11 @@ public class mediaController {
         Media newMedia        = new Media(file_url);
         MediaPlayer thePlayer = new MediaPlayer(newMedia);
         final MediaView theVideoView = new MediaView(thePlayer);
+        theVideoView.setSmooth(true);
         theVideoView.setPreserveRatio(true);
         thePlayer.setAutoPlay(autoplay);
         thePlayer.setMute(true);
+
         if(loop)
             thePlayer.setCycleCount(MediaPlayer.INDEFINITE);
         return theVideoView;

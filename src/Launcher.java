@@ -95,30 +95,16 @@ public class Launcher extends Application{
             secondStageTurbineBlade.setHeight(heightSecondary);
 
         /* Add elements to Viewport screen */
-        final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", stackPrimary, true, true );
+       /* final MediaView theViewportView = mediaCtrlr.loadVideo( resources+"loop-transparente.mp4", stackPrimary, true, true );
             theViewportView.setFitWidth(widthPrimary);
-            theViewportView.setFitHeight(heightPrimary);
+            theViewportView.setFitHeight(heightPrimary);*/
         stackPrimary.getChildren().removeAll();
-        stackPrimary.getChildren().add(theViewportView);
-
-           /* stackPrimary.widthProperty().addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
-                    System.out.println("widthPrimary");
-                    theViewportView.setFitWidth(widthPrimary);
-                }
-            });
-
-            stackPrimary.heightProperty().addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
-                    System.out.println("heightPrimary");
-                    theViewportView.setFitHeight(heightPrimary);
-                }
-            });*/
+        stackPrimary.setStyle("-fx-background-image: url('"+resources+"resources/bg_transparente.gif');" +
+                                " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
+        //stackPrimary.getChildren().add(theViewportView);
 
         /* Add elements to Controller surface */
-        final MediaView theCompassView = mediaCtrlr.loadVideo( resources+"loop-brujula.mp4", stackSecondary, true, true );
+       /* final MediaView theCompassView = mediaCtrlr.loadVideo( resources+"loop-brujula.mp4", stackSecondary, true, true );
 
             stackSecondary.widthProperty().addListener(new InvalidationListener() {
                 @Override
@@ -133,7 +119,7 @@ public class Launcher extends Application{
                     theCompassView.setFitHeight(heightSecondary);
                 }
             });
-
+        */
 
         final Button initButton = new Button("TOCA LA PANTALLA PARA INICIAR");
         initButton.setMinWidth(1280);
@@ -153,7 +139,9 @@ public class Launcher extends Application{
             }
         });
 
-        stackSecondary.getChildren().addAll(theCompassView, initButton);
+        stackSecondary.setStyle("-fx-background-image: url('"+resources+"resources/bg_brujula.gif');" +
+                                " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent; ");
+        stackSecondary.getChildren().addAll( initButton);
         Scene sceneSurface = new Scene(stackSecondary, widthSecondary, heightSecondary);
         secondStageTurbineBlade.setScene(sceneSurface);
 
@@ -236,10 +224,20 @@ public class Launcher extends Application{
                                         myButtonHere.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
                                                 " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
                                                 " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+
+                                        if(Integer.parseInt(myButton.getId()) == 5)
+                                            myButtonHere.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu.png');" +
+                                                    " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                                    " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                                     }
                                     mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu_hover.png');" +
                                             " -fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
                                             " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
+
+                                    if(Integer.parseInt(myButton.getId()) == 5)
+                                        mySubButton.setStyle("-fx-background-image: url('"+resources+"resources/bg_submenu_hover.png');" +
+                                                " -fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-color: transparent;" +
+                                                " -fx-font-size: 14px; -fx-text-fill: #FFFFFF; -fx-text-alignment: center; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
                                     try {
                                         Scene newScene = presenter.showDetail(place.getId());
                                         //System.out.println(primaryStage.getScene());
@@ -251,8 +249,8 @@ public class Launcher extends Application{
                                                 System.out.println("Entering stby modo");
                                                 presenter.showScreensaver(primaryStage, widthPrimary, heightPrimary);
                                             }
-                                        }, 10000);
-                                        // 300000
+                                        }, 300000);
+
                                         primaryStage.setScene(newScene);
                                     } catch (SQLException e) {
                                         e.printStackTrace();
